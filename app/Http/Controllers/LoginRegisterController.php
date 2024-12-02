@@ -30,6 +30,7 @@ class LoginRegisterController extends Controller
 
     public function store(Request $request)
     {
+        //validasi
         $request->validate([
             'name' => 'required|string|max:250',
             'email' => 'required|email|max:250|unique:users',
@@ -37,6 +38,7 @@ class LoginRegisterController extends Controller
             'photo' => 'nullable|image|mimes:jpeg,png|max:1999'
         ]);
 
+        // cara menyiapkan file photo
         if ($request->hasFile('photo')) {
             $filenameWithExt = $request->file('photo')->getClientOriginalName();
             $filenameWithoutExt = pathinfo($filenameWithExt, PATHINFO_FILENAME);
